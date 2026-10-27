@@ -1,0 +1,5 @@
+AgroGest 1.2.3
+Revisão de 27/10/2026
+Menu lateral e ícones mantidos durante a navegação entre secções; SVG directo no HTML.
+Inclui o login temporário por clique e as correcções das versões 1.2.1 e 1.2.2.
+Leia docs/NAVEGACAO_1.2.3.md e docs/LOGIN_TEMPORARIO.md.

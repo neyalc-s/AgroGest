@@ -1,0 +1,26 @@
+[Unit]
+Description=AgroGest - Apache Tomcat 10.1
+After=network.target
+
+[Service]
+Type=simple
+User=agrogest
+Group=agrogest
+WorkingDirectory=/opt/agrogest
+Environment=JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64
+Environment=CATALINA_HOME=/opt/agrogest/runtime/tomcat
+Environment=CATALINA_BASE=/opt/agrogest/runtime/tomcat
+Environment=AGROGEST_DATA_DIR=/var/lib/agrogest
+ExecStart=/opt/agrogest/runtime/tomcat/bin/catalina.sh run
+ExecStop=/opt/agrogest/runtime/tomcat/bin/shutdown.sh
+KillSignal=SIGTERM
+TimeoutStopSec=45
+SuccessExitStatus=143
+Restart=on-failure
+StateDirectory=agrogest
+UMask=0077
+NoNewPrivileges=true
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
