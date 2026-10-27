@@ -1,0 +1,12 @@
+/target/
+/dados/
+/.agents/
+/.aws/
+/.codex/
+/.git-local/
+/runtime/tomcat/logs/*
+/runtime/tomcat/temp/*
+/runtime/tomcat/work/*
+/runtime/tomcat/webapps/
+*.ser
+*.ser.bak
