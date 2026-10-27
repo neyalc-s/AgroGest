@@ -15,3 +15,4 @@ dist
 *.ser
 *.ser.bak
 *.log
+!src/test/resources/estado-v1.ser

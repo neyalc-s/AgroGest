@@ -12,3 +12,4 @@
 *.ser.bak
 __pycache__/
 *.py[cod]
+!/src/test/resources/estado-v1.ser
