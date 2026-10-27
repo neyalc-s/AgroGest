@@ -10,3 +10,5 @@
 /runtime/tomcat/webapps/
 *.ser
 *.ser.bak
+__pycache__/
+*.py[cod]

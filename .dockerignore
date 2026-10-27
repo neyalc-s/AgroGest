@@ -1,0 +1,17 @@
+.git
+.git-local
+.agents
+.aws
+.codex
+.idea
+.vscode
+dados
+target
+runtime/tomcat/logs
+runtime/tomcat/temp
+runtime/tomcat/work
+runtime/tomcat/webapps
+dist
+*.ser
+*.ser.bak
+*.log

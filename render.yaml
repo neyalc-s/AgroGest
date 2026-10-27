@@ -1,0 +1,12 @@
+services:
+  - type: web
+    name: agrogest
+    runtime: docker
+    plan: free
+    branch: render-deploy
+    dockerfilePath: ./Dockerfile
+    dockerContext: .
+    healthCheckPath: /agrogest/login
+    envVars:
+      - key: AGROGEST_DEMO_LOGIN
+        value: "true"
