@@ -33,7 +33,7 @@ function check(name, condition) { assert.ok(condition, name); count++; console.l
         await account.click();
         check('Clique preenche email e senha a ' + width + ' px: ' + email,
           await page.locator('input[name="email"]').inputValue() === email &&
-          await page.locator('input[name="senha"]').inputValue() === await account.getAttribute('data-demo-senha'));
+          await page.locator('input[name="senha"]').inputValue() === (email === 'admin@agro.mz' ? 'admin234' : 'cliente123'));
         check('Clique aguarda o botão Entrar: ' + email, page.url().endsWith('/login') && posts === 0);
         check('Uma só conta fica seleccionada', await page.locator('[data-demo-account][aria-pressed="true"]').count() === 1);
         check('Página cabe na largura do ecrã', await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth));
@@ -64,7 +64,7 @@ function check(name, condition) { assert.ok(condition, name); count++; console.l
     const fresh = page.locator('[data-demo-account]').filter({ has: page.locator('small', { hasText: 'navegador@teste.mz' }) });
     check('Conta recém-criada aparece automaticamente', await fresh.count() === 1 && await page.locator('[data-demo-account]').count() === 5);
     await fresh.click();
-    check('Conta nova também preenche os dois campos', await page.locator('input[name="email"]').inputValue() === 'navegador@teste.mz' && (await page.locator('input[name="senha"]').inputValue()).startsWith('demo-'));
+    check('Conta nova também preenche os dois campos', await page.locator('input[name="email"]').inputValue() === 'navegador@teste.mz' && await page.locator('input[name="senha"]').inputValue() === 'cliente123');
     await page.getByRole('button', { name: 'Entrar', exact: false }).click();
     await page.waitForURL(base + '/catalogo');
     check('Conta nova entra depois do botão', page.url().endsWith('/catalogo'));

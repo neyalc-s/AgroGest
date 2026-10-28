@@ -47,7 +47,7 @@ No primeiro arranque sem ficheiro guardado, são criados dados **fictícios de d
 
 Ao iniciar com `iniciar.sh` ou `iniciar.bat`, a página de login mostra todas as contas existentes. Clique numa conta: os dois campos são preenchidos, mas só entra depois de carregar em **Entrar**. O selector acompanha automaticamente os novos registos.
 
-O preenchimento usa uma credencial temporária da sessão. A palavra-passe original e o seu hash mantêm-se, e o login manual continua a funcionar. Contas inactivas aparecem desactivadas.
+O preenchimento usa `admin234` para administradores e `cliente123` para clientes. A palavra-passe original e o seu hash mantêm-se, e o login manual continua a funcionar. Contas inactivas aparecem desactivadas.
 
 Para desligar a opção em Linux: `AGROGEST_DEMO_LOGIN=false bash iniciar.sh`. No Windows, defina `AGROGEST_DEMO_LOGIN=false` antes de executar `iniciar.bat`. Num Tomcat externo, o selector fica desligado por omissão; pode activá-lo com `AGROGEST_DEMO_LOGIN=true` ou `-Dagrogest.demoLogin=true`.
 

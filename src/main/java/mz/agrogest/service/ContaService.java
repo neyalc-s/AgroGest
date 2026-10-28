@@ -10,7 +10,6 @@ import java.util.Locale;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.UUID;
 import java.security.MessageDigest;
 import java.nio.charset.StandardCharsets;
 
@@ -59,7 +58,8 @@ public class ContaService {
         synchronized (store) {
             List<AcessoDemonstracao> acessos = new ArrayList<>();
             for (Utilizador u : store.estado().utilizadores.values()) {
-                acessos.add(new AcessoDemonstracao(u.getId(), u.getNome(), u.getEmail(), u.getPerfil(), u.isAtivo(), "demo-" + UUID.randomUUID()));
+                String credencial = u.getPerfil() == Perfil.ADMIN ? "admin234" : "cliente123";
+                acessos.add(new AcessoDemonstracao(u.getId(), u.getNome(), u.getEmail(), u.getPerfil(), u.isAtivo(), credencial));
             }
             acessos.sort(Comparator.comparing(AcessoDemonstracao::getPerfil)
                     .thenComparing(AcessoDemonstracao::getNome, Formatos.nomes()));
