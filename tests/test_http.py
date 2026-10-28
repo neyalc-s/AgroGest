@@ -87,7 +87,7 @@ def start(data_dir, log):
             raise RuntimeError('A porta 8081 está ocupada. Pare o outro servidor antes dos testes.')
     env = os.environ.copy()
     env['AGROGEST_DATA_DIR'] = str(data_dir)
-    process = subprocess.Popen(['bash', str(ROOT / 'iniciar.sh')], cwd=ROOT, env=env, stdout=log, stderr=log)
+    process = subprocess.Popen(['bash', str(ROOT / 'scripts' / 'iniciar.sh')], cwd=ROOT, env=env, stdout=log, stderr=log)
     limit = time.monotonic() + 45
     while time.monotonic() < limit:
         if process.poll() is not None:

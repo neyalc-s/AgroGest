@@ -9,7 +9,7 @@ Este manual explica as operações principais com os nomes dos menus e botões q
 
 1. Extraia todo o ZIP.
 2. Confirme que tem Java 17 ou superior: `java -version`.
-3. Em Linux, abra um terminal na pasta AgroGest e execute `bash iniciar.sh`. Em Windows, abra `iniciar.bat`.
+3. Em Linux, abra um terminal na pasta AgroGest e execute `bash scripts/iniciar.sh`. Em Windows, abra `scripts/iniciar.bat`.
 4. Aguarde o arranque e abra http://localhost:8081/agrogest/.
 5. Mantenha o terminal do servidor aberto.
 
@@ -230,8 +230,8 @@ O programa guarda `agrogest.ser` e conserva a versão anterior em `agrogest.ser.
 ### Encerrar normalmente
 
 1. Guarde manualmente se quiser assegurar o último ponto antes de parar.
-2. Linux: use `bash parar.sh` noutro terminal ou Ctrl+C no terminal principal.
-3. Windows: abra `parar.bat`.
+2. Linux: use `bash scripts/parar.sh` noutro terminal ou Ctrl+C no terminal principal.
+3. Windows: abra `scripts/parar.bat`.
 4. Aguarde a mensagem de estado gravado.
 5. Volte a executar `iniciar` quando precisar. Os dados guardados são recuperados automaticamente.
 
@@ -263,7 +263,7 @@ Para voltar aos dados iniciais, pare primeiro o servidor, faça uma cópia da pa
 3. Faça uma cópia de segurança da pasta `dados`.
 4. Extraia o novo ZIP para outra pasta.
 5. Copie a pasta `dados` da versão anterior para dentro da nova pasta AgroGest.
-6. Execute o novo `iniciar.sh` ou `iniciar.bat`.
+6. Execute o novo `scripts/iniciar.sh` ou `scripts/iniciar.bat`.
 7. Entre e confira as suas compras e produtos. Não precisa de voltar aos dados de demonstração.
 
 ### Formulário de produto desactualizado

@@ -327,7 +327,7 @@ WAR significa **Web Application Archive**. É um pacote de aplicação web. Cont
 
 **Deploy** significa colocar essa aplicação no servidor para poder receber pedidos. No Tomcat, copiar `agrogest.war` para `webapps` permite publicar o contexto `/agrogest`.
 
-O ZIP inclui um WAR já compilado e um Tomcat portátil. Por isso, para experimentar, executas `iniciar.sh` ou `iniciar.bat` com Java instalado. Para alterar e recompilar o código, precisas também de JDK e Maven.
+O ZIP inclui um WAR já compilado e um Tomcat portátil. Por isso, para experimentar, executas `scripts/iniciar.sh` ou `scripts/iniciar.bat` com Java instalado. Para alterar e recompilar o código, precisas também de JDK e Maven.
 
 ### Portas e configuração
 

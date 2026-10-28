@@ -64,7 +64,7 @@ Os testes de interface visual, os scripts Windows e a instalação do serviço s
 2. Pare o servidor normalmente e faça uma cópia de segurança de toda a pasta `dados`.
 3. Extraia todo o novo ZIP para outra pasta.
 4. Copie a pasta `dados` anterior para dentro da nova pasta `AgroGest`.
-5. Execute `bash iniciar.sh` em Linux ou `iniciar.bat` em Windows.
+5. Execute `bash scripts/iniciar.sh` em Linux ou `scripts/iniciar.bat` em Windows.
 6. Confira os produtos, o stock e as facturas antes de continuar o trabalho.
 
 Se usar um caminho personalizado por `AGROGEST_DATA_DIR`, mantenha esse caminho. Execute uma única instância por pasta de dados. Os testes usam dados temporários e não acompanham a entrega como dados de utilização.

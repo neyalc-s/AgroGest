@@ -13,10 +13,10 @@ Trabalho prático de Sistemas Distribuídos, Engenharia Informática. Aplicaçã
 3. **Linux:** abra um terminal dentro da pasta `AgroGest` e execute:
 
    ```bash
-   bash iniciar.sh
+   bash scripts/iniciar.sh
    ```
 
-   **Windows:** abra `iniciar.bat`. Se o Java não for encontrado, configure `JAVA_HOME` para a pasta do JDK e reabra o terminal.
+   **Windows:** abra `scripts/iniciar.bat`. Se o Java não for encontrado, configure `JAVA_HOME` para a pasta do JDK e reabra o terminal.
 
 4. Aguarde a mensagem `Server startup` e abra **http://localhost:8081/agrogest/**.
 5. Mantenha o terminal do servidor aberto enquanto utiliza a aplicação.
@@ -25,8 +25,8 @@ O Tomcat e o WAR estão incluídos. **Não precisa de Maven nem de Internet para
 
 ### Parar e conservar os dados
 
-- Linux: execute `bash parar.sh` noutro terminal, ou use Ctrl+C no terminal do servidor.
-- Windows: abra `parar.bat` e aguarde o encerramento no terminal principal.
+- Linux: execute `bash scripts/parar.sh` noutro terminal, ou use Ctrl+C no terminal do servidor.
+- Windows: abra `scripts/parar.bat` e aguarde o encerramento no terminal principal.
 - Confirme nos logs a mensagem **“estado gravado ao encerrar”**. Evite fechar à força o processo Java.
 - Em **Guardar dados → Gravar agora**, pode guardar sem parar o servidor.
 
@@ -45,11 +45,11 @@ No primeiro arranque sem ficheiro guardado, são criados dados **fictícios de d
 
 ### Selector temporário de utilizadores
 
-Ao iniciar com `iniciar.sh` ou `iniciar.bat`, a página de login mostra todas as contas existentes. Clique numa conta: os dois campos são preenchidos, mas só entra depois de carregar em **Entrar**. O selector acompanha automaticamente os novos registos.
+Ao iniciar com `scripts/iniciar.sh` ou `scripts/iniciar.bat`, a página de login mostra todas as contas existentes. Clique numa conta: os dois campos são preenchidos, mas só entra depois de carregar em **Entrar**. O selector acompanha automaticamente os novos registos.
 
 O preenchimento usa `admin234` para administradores e `cliente123` para clientes. A palavra-passe original e o seu hash mantêm-se, e o login manual continua a funcionar. Contas inactivas aparecem desactivadas.
 
-Para desligar a opção em Linux: `AGROGEST_DEMO_LOGIN=false bash iniciar.sh`. No Windows, defina `AGROGEST_DEMO_LOGIN=false` antes de executar `iniciar.bat`. Num Tomcat externo, o selector fica desligado por omissão; pode activá-lo com `AGROGEST_DEMO_LOGIN=true` ou `-Dagrogest.demoLogin=true`.
+Para desligar a opção em Linux: `AGROGEST_DEMO_LOGIN=false bash scripts/iniciar.sh`. No Windows, defina `AGROGEST_DEMO_LOGIN=false` antes de executar `scripts/iniciar.bat`. Num Tomcat externo, o selector fica desligado por omissão; pode activá-lo com `AGROGEST_DEMO_LOGIN=true` ou `-Dagrogest.demoLogin=true`.
 
 ## 3. O que o programa faz
 
@@ -68,8 +68,8 @@ O IVA de 16% foi aplicado **por exigência do enunciado**. Este projecto académ
 | Ficheiro | Para quê |
 | --- | --- |
 | `docs/Manual_Utilizacao.pdf` | Passos das operações de administrador e cliente |
-| `docs/Guia_Teoria_Defesa.pdf` | Explicação dos temas desde o início, com exemplos do código |
-| `docs/Guia_Teoria_Defesa.md` | A mesma teoria num formato fácil de pesquisar e editar |
+| [Manual_Utilizador.pdf](Manual_Utilizador.pdf) | Manual do utilizador |
+| `docs/Guia_Teoria_Defesa.md` | Teoria e preparação da defesa num formato pesquisável e editável |
 | `docs/APRESENTACAO_E_DEMONSTRACAO.md` | Texto para explicar o trabalho e sequência da demonstração |
 | `docs/REQUISITOS.md` | Correspondência entre cada requisito e a implementação |
 | `docs/INTERFACE.md` | Alterações visuais, acessibilidade e explicação do CSS/JavaScript |
@@ -109,10 +109,10 @@ mvn clean verify
 O novo WAR fica em `target/agrogest.war`. Para actualizar a versão usada pelos scripts:
 
 ```bash
-bash compilar.sh
+bash scripts/compilar.sh
 ```
 
-No Windows, execute `compilar.bat`. Pare o servidor antes de substituir a aplicação, compile e volte a executar `iniciar`. O script copia `dist/agrogest.war` para o Tomcat.
+No Windows, execute `scripts/compilar.bat`. Pare o servidor antes de substituir a aplicação, compile e volte a executar `iniciar`. O script copia `dist/agrogest.war` para o Tomcat.
 
 Os testes de regras de negócio fazem parte de `mvn verify`. Para o teste HTTP completo em Linux, com a porta 8081 livre:
 
@@ -174,7 +174,7 @@ sudo systemctl restart agrogest
 sudo journalctl -u agrogest -n 80 --no-pager
 ```
 
-O systemd cria `/var/lib/agrogest` com `StateDirectory`. O Tomcat escreve os seus logs em `runtime/tomcat/logs`. Não inicie simultaneamente o serviço e `iniciar.sh`, pois ambos usam as mesmas portas.
+O systemd cria `/var/lib/agrogest` com `StateDirectory`. O Tomcat escreve os seus logs em `runtime/tomcat/logs`. Não inicie simultaneamente o serviço e `scripts/iniciar.sh`, pois ambos usam as mesmas portas.
 
 ## 10. Onde ficam os dados e como restaurar
 
@@ -218,3 +218,25 @@ O botão **Eliminar ficheiros** elimina o estado em disco e o backup, mas conser
 - API `Files.move`: https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/nio/file/Files.html
 
 As licenças do Tomcat acompanham a distribuição em `runtime/tomcat/LICENSE` e `NOTICE`. Os nomes, contactos e compras iniciais são fictícios para demonstração.
+
+## Pastas do projecto
+
+| Local | Conteúdo |
+| --- | --- |
+| `src/` | Código Java, páginas JSP, estilos e recursos da aplicação |
+| `scripts/` | Iniciar, parar e compilar, em Linux (`.sh`) e Windows (`.bat`) |
+| `dist/` | WAR pronto a executar, versão e ficheiro de verificação SHA-256 |
+| `runtime/` | Tomcat incluído para execução local |
+| `docs/` | Manuais e documentação técnica |
+| `tests/` | Testes HTTP e de navegador |
+| `deploy/` | Configuração de execução como serviço |
+| `dados/` | Estado local guardado, excluído do Git |
+| `target/` | Ficheiros gerados pelo Maven, excluídos do Git |
+
+A raiz mantém o `README.md`, o `pom.xml` e a configuração do Git. Para compilar e actualizar o WAR local, execute `bash scripts/compilar.sh` ou abra `scripts/compilar.bat`.
+
+A partir da raiz, confirme a integridade dos ficheiros distribuídos com:
+
+```bash
+sha256sum -c dist/SHA256SUMS.txt
+```
