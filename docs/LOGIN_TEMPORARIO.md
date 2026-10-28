@@ -10,7 +10,7 @@ A lista é obtida dos dados actuais: inclui o administrador, todos os clientes d
 
 ## Credenciais
 
-Como as palavras-passe originais são guardadas apenas como hash, o selector usa uma credencial de demonstração própria de cada conta e da sessão do navegador. As palavras-passe originais continuam a funcionar e não são alteradas. O estado `agrogest.ser` não recebe estas credenciais temporárias. O login normal, os perfis, o CSRF e o botão Entrar continuam activos.
+O selector preenche `admin234` para administradores e `cliente123` para clientes, incluindo contas criadas posteriormente. Estas credenciais só permitem o acesso de demonstração quando o modo está activo. As palavras-passe originais continuam a funcionar e não são alteradas: são guardadas apenas como hash. O estado `agrogest.ser` não recebe estas credenciais em texto simples. O login normal, os perfis, o CSRF e o botão Entrar continuam activos.
 
 ## Activar ou desligar
 
@@ -37,7 +37,7 @@ Num Tomcat externo, o selector está desligado por omissão. Para o activar, def
 - As quatro suites HTTP passaram: 128 + 32 + 22 + 19 = 201 verificações.
 - O teste de navegador passou 52 verificações, com cliques reais nas quatro contas iniciais, em 1440 e 390 px, e numa conta criada durante o teste.
 - Confirmado que clicar só preenche os campos e que carregar em Entrar abre o perfil correcto.
-- Confirmado que as palavras-passe originais continuam válidas, que credenciais de outra sessão são recusadas e que é possível desligar o selector.
+- As verificações actuais confirmam as credenciais por perfil, a preservação das palavras-passe originais e a opção de desligar o selector.
 - Páginas desktop e móvel inspeccionadas visualmente, sem transbordo horizontal.
 
 Testes novos: `src/test/java/mz/agrogest/DemonstracaoTest.java`, `tests/test_login_demo.py` e `tests/test_login_browser.py` / `.cjs`.

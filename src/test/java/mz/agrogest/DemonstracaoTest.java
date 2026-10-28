@@ -24,10 +24,11 @@ class DemonstracaoTest {
         assertEquals(4, acessos.size());
         assertEquals(Perfil.ADMIN, acessos.get(0).getPerfil());
         for (AcessoDemonstracao a : acessos) {
+            String original = a.getPerfil() == Perfil.ADMIN ? "admin234" : "cliente123";
+            assertEquals(original, a.getCredencial());
             String hash = contas.procurar(a.getUtilizadorId()).getSenhaHash();
             assertEquals(a.getUtilizadorId(), contas.autenticarDemonstracao(a, a.getEmail(), a.getCredencial()).getId());
             assertEquals(hash, contas.procurar(a.getUtilizadorId()).getSenhaHash());
-            String original = a.getPerfil() == Perfil.ADMIN ? "admin234" : "cliente123";
             assertEquals(a.getUtilizadorId(), contas.autenticar(a.getEmail(), original).getId());
         }
     }
@@ -37,7 +38,7 @@ class DemonstracaoTest {
         AcessoDemonstracao a = contas.acessosDemonstracao().stream().filter(x -> x.getUtilizadorId() == novo.getId()).findFirst().orElseThrow();
         assertEquals(novo.getId(), contas.autenticarDemonstracao(a, a.getEmail(), a.getCredencial()).getId());
         assertEquals(novo.getId(), contas.autenticar(novo.getEmail(), "segredo-novo").getId());
-        assertNotEquals("segredo-novo", a.getCredencial());
+        assertEquals("cliente123", a.getCredencial());
     }
 
     @Test void credencialErradaOutroEmailOuContaInactivaSaoRecusados() {

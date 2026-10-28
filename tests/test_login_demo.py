@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Contas de demonstração dinâmicas, isolamento da sessão e opção de desligar."""
+"""Contas de demonstração dinâmicas, credenciais por perfil e opção de desligar."""
 from pathlib import Path
 from html.parser import HTMLParser
 import json
@@ -52,21 +52,21 @@ def main():
                 expected = {'admin@agro.mz', 'joao@teste.mz', 'ana@teste.mz', 'amelia@teste.mz'}
                 check('As quatro contas existentes aparecem no selector', set(available) == expected)
                 check('Contas são botões que não submetem o formulário', all(a.get('type') == 'button' for a in available.values()))
-                check('Credenciais temporárias são diferentes por conta', len({a['data-demo-senha'] for a in available.values()}) == 4)
                 for email in sorted(expected):
+                    original = 'admin234' if email == 'admin@agro.mz' else 'cliente123'
+                    check('Selector fornece a senha do perfil: ' + email, available[email]['data-demo-senha'] == original)
                     b = h.Browser()
                     response = select_login(b, email)
                     target = '/admin' if email == 'admin@agro.mz' else '/catalogo'
                     check('Entrar com a conta seleccionada: ' + email, response[0] == 200 and response[1].endswith(target))
-                    original = 'admin234' if email == 'admin@agro.mz' else 'cliente123'
                     check('Senha original preservada: ' + email, h.Browser().login(email, original)[1].endswith(target))
 
                 other = h.Browser()
-                own = accounts(other)
-                borrowed = available['admin@agro.mz']['data-demo-senha']
-                check('Cada sessão recebe credenciais próprias', own['admin@agro.mz']['data-demo-senha'] != borrowed)
-                response = other.post('/login', email='admin@agro.mz', senha=borrowed)
-                check('Credencial de outra sessão não permite entrar', response[1].endswith('/login') and 'incorrectos' in response[2])
+                accounts(other)
+                response = other.post('/login', email='admin@agro.mz', senha='cliente123')
+                check('Administrador recusa a senha de cliente', response[1].endswith('/login') and 'incorrectos' in response[2])
+                response = other.post('/login', email='joao@teste.mz', senha='admin234')
+                check('Cliente recusa a senha de administrador', response[1].endswith('/login') and 'incorrectos' in response[2])
 
                 new = h.Browser()
                 new.request('/registo')
@@ -74,6 +74,7 @@ def main():
                 new.post('/logout')
                 available_new = accounts(new)
                 check('Nova conta é incluída automaticamente', len(available_new) == 5 and 'novo-demo@teste.mz' in available_new)
+                check('Nova conta recebe a senha de demonstração de cliente', available_new['novo-demo@teste.mz']['data-demo-senha'] == 'cliente123')
                 response = new.post('/login', email='novo-demo@teste.mz', senha=available_new['novo-demo@teste.mz']['data-demo-senha'])
                 check('Nova conta entra com credencial temporária', response[1].endswith('/catalogo'))
                 check('Nova conta continua a aceitar a senha original', h.Browser().login('novo-demo@teste.mz', 'senha-nova-123')[1].endswith('/catalogo'))
@@ -88,6 +89,8 @@ def main():
                 b = h.Browser()
                 response = b.request('/login')
                 check('Modo temporário pode ser desligado', not Accounts(response[2]).accounts and 'data-demo-senha' not in response[2])
+                response = b.post('/login', email='novo-demo@teste.mz', senha='cliente123')
+                check('Modo desligado recusa a senha de demonstração da nova conta', response[1].endswith('/login') and 'incorrectos' in response[2])
                 check('Login normal funciona com o modo temporário desligado', b.login('novo-demo@teste.mz', 'senha-nova-123')[1].endswith('/catalogo'))
             except Exception:
                 log.flush(); print((folder/'tomcat.log').read_text()[-10000:])

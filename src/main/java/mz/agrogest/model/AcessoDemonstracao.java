@@ -2,7 +2,7 @@ package mz.agrogest.model;
 
 import java.io.Serializable;
 
-/** Dados do selector temporário; não contém o hash nem a senha original. */
+/** Dados do selector temporário, com credencial de demonstração por perfil e sem hash. */
 public final class AcessoDemonstracao implements Serializable {
     private static final long serialVersionUID = 1L;
     private final int utilizadorId;

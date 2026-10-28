@@ -84,7 +84,7 @@ Este comando compila o projecto e executa os testes. Nesse caso, publique o novo
 
 As contas e os registos iniciais são fictícios e servem para demonstrar o funcionamento do sistema. Também é possível criar uma conta de cliente na página de registo.
 
-Quando o selector de demonstração estiver activo na página de entrada, clique numa conta para preencher os campos e depois carregue em **Entrar**.
+Quando o selector de demonstração estiver activo na página de entrada, clique numa conta para preencher o email e a palavra-passe (`admin234` para administradores ou `cliente123` para clientes) e depois carregue em **Entrar**.
 
 ## Como o sistema está organizado
 
