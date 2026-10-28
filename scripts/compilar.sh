@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-AGROGEST_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+AGROGEST_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$AGROGEST_ROOT"
 if ! command -v mvn >/dev/null 2>&1; then echo "Instale Maven 3.9+ e um JDK 17. Consulte README.md."; exit 1; fi
 mvn clean verify

@@ -4,7 +4,7 @@ Referência: AgroGest Trabalho prático 2026(1).pdf, páginas 1 a 7. O objectivo
 
 | Enunciado | Implementação | Onde demonstrar/verificar |
 | --- | --- | --- |
-| Java, Servlets e Tomcat, sem BD | Java 17, Jakarta Servlet 6.0, WAR e Tomcat 10.1 incluído | pom.xml, dist/agrogest.war, iniciar.sh |
+| Java, Servlets e Tomcat, sem BD | Java 17, Jakarta Servlet 6.0, WAR e Tomcat 10.1 incluído | pom.xml, dist/agrogest.war, scripts/iniciar.sh |
 | MVC e POJOs Serializable | Pacotes por responsabilidade e JSP em WEB-INF | model, repo, service, servlet, WEB-INF/views |
 | Admin fixo no arranque | garantirAdministrador, email e palavra-passe do exemplo | ContaService, AplicacaoListener |
 | Extra temporário: selector de login | Todas as contas, preenchimento por clique e entrada manual; desactivável | AuthServlet, ContaService, login.jsp e login.js |

@@ -35,7 +35,7 @@ A escala `--space-1` a `--space-7` contém 4, 8, 12, 16, 24, 32 e 48 px. Os raio
 
 ## Execução e verificação
 
-`dist/agrogest.war` foi actualizado para que `bash iniciar.sh` apresente o redesign pelo fluxo habitual. Os testes usam pastas temporárias; não utilizam os dados locais do utilizador.
+`dist/agrogest.war` foi actualizado para que `bash scripts/iniciar.sh` apresente o redesign pelo fluxo habitual. Os testes usam pastas temporárias; não utilizam os dados locais do utilizador.
 
 Foi corrigida uma falha anterior ao redesign: faltava `src/test/resources/estado-v1.ser`, exigido pelo teste de compatibilidade. Foi restaurada a cópia legada existente, com SHA-256 `38fa63c5fa715413d8dd47c6ca56958aa109b61d870f4e98b7929ca052230f2b`, e adicionada a excepção no `.gitignore`.
 

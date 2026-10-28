@@ -46,17 +46,17 @@ O sistema verifica se existe stock suficiente antes de concluir uma compra. As f
    **Linux:** abra o terminal nessa pasta e execute:
 
    ```bash
-   bash iniciar.sh
+   bash scripts/iniciar.sh
    ```
 
-   **Windows:** abra o ficheiro `iniciar.bat`.
+   **Windows:** abra o ficheiro `scripts/iniciar.bat`.
 
 4. Aguarde o arranque e abra [http://localhost:8081/agrogest/](http://localhost:8081/agrogest/) no navegador.
 5. Mantenha o terminal do servidor aberto enquanto utiliza o sistema.
 
 O pacote pronto inclui o Tomcat e a aplicação compilada. Para o executar, basta ter o Java instalado.
 
-Para parar no Linux, use `bash parar.sh` noutro terminal ou pressione **Ctrl+C** no terminal do servidor. No Windows, abra `parar.bat`. O encerramento normal permite guardar os dados.
+Para parar no Linux, use `bash scripts/parar.sh` noutro terminal ou pressione **Ctrl+C** no terminal do servidor. No Windows, abra `scripts/parar.bat`. O encerramento normal permite guardar os dados.
 
 ### Num servidor Tomcat — publicação da aplicação
 
@@ -108,4 +108,26 @@ Na execução local, o sistema guarda o estado em ficheiro ao encerrar normalmen
 
 ## Manual de utilização
 
-O [manual de utilização em PDF](docs/Manual_Utilizacao.pdf) explica, passo a passo, as principais operações do administrador e do cliente. A pasta `docs` contém também a restante documentação do trabalho.
+O [manual de utilização em PDF](docs/Manual_Utilizacao.pdf) explica, passo a passo, as principais operações do administrador e do cliente. A pasta `docs` contém também a restante documentação do trabalho. Está também disponível o [Manual do Utilizador](Manual_Utilizador.pdf).
+
+## Pastas do projecto
+
+| Local | Conteúdo |
+| --- | --- |
+| `src/` | Código Java, páginas JSP, estilos e recursos da aplicação |
+| `scripts/` | Iniciar, parar e compilar, em Linux (`.sh`) e Windows (`.bat`) |
+| `dist/` | WAR pronto a executar, versão e ficheiro de verificação SHA-256 |
+| `runtime/` | Tomcat incluído para execução local |
+| `docs/` | Manuais e documentação técnica |
+| `tests/` | Testes HTTP e de navegador |
+| `deploy/` | Configuração de execução como serviço |
+| `dados/` | Estado local guardado, excluído do Git |
+| `target/` | Ficheiros gerados pelo Maven, excluídos do Git |
+
+A raiz mantém o `README.md`, o `pom.xml` e a configuração do Git. Para compilar e actualizar o WAR local, execute `bash scripts/compilar.sh` ou abra `scripts/compilar.bat`.
+
+A partir da raiz, confirme a integridade dos ficheiros distribuídos com:
+
+```bash
+sha256sum -c dist/SHA256SUMS.txt
+```

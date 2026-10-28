@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 set -euo pipefail
-AGROGEST_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" && pwd)"
+AGROGEST_ROOT="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
 cd "$AGROGEST_ROOT"
 if ! command -v java >/dev/null 2>&1 && [[ -z "${JAVA_HOME:-}" ]] && [[ -z "${JRE_HOME:-}" ]]; then
   echo "Java não encontrado. Instale Java 17 e volte a executar este ficheiro."
@@ -31,5 +31,5 @@ mkdir -p "$CATALINA_BASE/webapps" "$CATALINA_BASE/logs" "$CATALINA_BASE/temp" "$
 if [[ ! -f dist/agrogest.war ]]; then echo "WAR em falta: dist/agrogest.war"; exit 1; fi
 if ! cmp -s dist/agrogest.war "$CATALINA_BASE/webapps/agrogest.war"; then cp dist/agrogest.war "$CATALINA_BASE/webapps/agrogest.war"; fi
 echo "AgroGest: http://localhost:8081/agrogest/"
-echo "Para terminar e gravar: Ctrl+C, ou execute bash parar.sh noutro terminal."
+echo "Para terminar e gravar: Ctrl+C, ou execute bash scripts/parar.sh noutro terminal."
 exec bash "$CATALINA_HOME/bin/catalina.sh" run

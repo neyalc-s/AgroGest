@@ -14,19 +14,19 @@ O selector preenche `admin234` para administradores e `cliente123` para clientes
 
 ## Activar ou desligar
 
-Os scripts incluídos `iniciar.sh` e `iniciar.bat` activam o selector temporário por omissão.
+Os scripts incluídos `scripts/iniciar.sh` e `scripts/iniciar.bat` activam o selector temporário por omissão.
 
 Em Linux, para desligar:
 
 ```bash
-AGROGEST_DEMO_LOGIN=false bash iniciar.sh
+AGROGEST_DEMO_LOGIN=false bash scripts/iniciar.sh
 ```
 
 Em Windows, no terminal:
 
 ```bat
 set AGROGEST_DEMO_LOGIN=false
-iniciar.bat
+scripts/iniciar.bat
 ```
 
 Num Tomcat externo, o selector está desligado por omissão. Para o activar, defina `AGROGEST_DEMO_LOGIN=true`, ou a propriedade Java `-Dagrogest.demoLogin=true`. A propriedade Java tem prioridade sobre a variável de ambiente.
