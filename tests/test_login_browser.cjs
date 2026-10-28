@@ -20,6 +20,47 @@ function check(name, condition) { assert.ok(condition, name); count++; console.l
   const errors = [];
   const emails = ['admin@agro.mz', 'ana@teste.mz', 'joao@teste.mz', 'amelia@teste.mz'];
   try {
+    for (const [width, height] of [[1920,1080], [1440,900], [1366,768], [1280,720], [1024,768], [768,1024], [390,844], [375,667], [320,640]]) {
+      const context = await browser.newContext({ viewport: { width, height }, reducedMotion: 'reduce' });
+      const page = await context.newPage();
+      page.on('pageerror', error => errors.push(error.message));
+      await page.goto(base + '/login');
+      await page.evaluate(() => document.fonts.ready);
+      const geometry = () => page.evaluate(() => {
+        const card = document.querySelector('.auth-card');
+        const bg = document.querySelector('.auth-backdrop').getBoundingClientRect();
+        const bounds = card.getBoundingClientRect();
+        return {
+          pageFits: document.documentElement.scrollHeight <= innerHeight && document.documentElement.scrollWidth <= innerWidth,
+          cardFits: card.scrollHeight <= card.clientHeight + 1,
+          backgroundCovers: bg.left <= 0 && bg.top <= 0 && bg.right >= innerWidth && bg.bottom >= innerHeight,
+          island: Number.parseFloat(getComputedStyle(card).borderRadius) >= 20 && bounds.top >= 0 && bounds.bottom <= innerHeight,
+          rightHalf: bounds.left >= innerWidth / 2,
+          presetsFit: [...document.querySelectorAll('[data-demo-account]')].every(button => {
+            const r = button.getBoundingClientRect();
+            return r.top >= bounds.top && r.bottom <= bounds.bottom;
+          })
+        };
+      });
+      const normal = await geometry();
+      if (!normal.cardFits || !normal.presetsFit) {
+        console.log(await page.locator('.auth-card').evaluate(card => ({ height: card.clientHeight, content: card.scrollHeight, children: [...card.children].map(el => ({ tag: el.tagName, cls: el.className, height: el.getBoundingClientRect().height })) })));
+        if (process.env.AGROGEST_VISUAL_DIR) await page.screenshot({ path: path.join(process.env.AGROGEST_VISUAL_DIR, 'login-island-overflow.png') });
+      }
+      check('Login sem deslocamento de página nem painel: ' + width + 'x' + height, normal.pageFits && normal.cardFits && normal.presetsFit);
+      check('Imagem contínua e ilha arredondada: ' + width + 'x' + height, normal.backgroundCovers && normal.island && (width <= 960 || normal.rightHalf));
+      if (process.env.AGROGEST_VISUAL_DIR) {
+        fs.mkdirSync(process.env.AGROGEST_VISUAL_DIR, { recursive: true });
+        await page.screenshot({ path: path.join(process.env.AGROGEST_VISUAL_DIR, 'login-island-' + width + 'x' + height + '.png'), fullPage: true });
+      }
+      await page.locator('input[name="email"]').fill('admin@agro.mz');
+      await page.locator('input[name="senha"]').fill('incorrect-password');
+      await page.getByRole('button', { name: 'Entrar', exact: false }).click();
+      await page.waitForSelector('.alert.error');
+      const error = await geometry();
+      check('Erro de login continua visível sem deslocamento: ' + width + 'x' + height, error.pageFits && error.cardFits && error.presetsFit);
+      await context.close();
+    }
     for (const width of [1440, 390]) {
       for (const email of emails) {
         const context = await browser.newContext({ viewport: { width, height: 980 }, reducedMotion: 'reduce' });

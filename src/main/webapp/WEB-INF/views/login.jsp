@@ -1,7 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%@ taglib prefix="t" tagdir="/WEB-INF/tags" %>
-<t:auth titulo="Entrar na sua conta">
+<t:auth titulo="Entrar na sua conta" tipo="login">
   <p class="muted">Continue a cuidar do que faz crescer.</p>
   <form method="post" action="${cp}/login" class="stack" data-login-form>
     <t:csrf/>
@@ -17,10 +17,10 @@
   <c:if test="${demoLogin}">
     <section class="demo-selector" aria-labelledby="demo-title">
       <div class="demo-selector-heading">
-        <h2 id="demo-title">Utilizadores disponíveis</h2>
+        <h2 id="demo-title">Acesso rápido</h2>
         <span class="badge orange">Temporário</span>
       </div>
-      <p class="demo-status" data-demo-status role="status">Clique numa conta para preencher os campos. Depois, carregue em Entrar.</p>
+      <p class="demo-status" data-demo-status role="status">Escolha uma conta para preencher os campos.</p>
       <div class="demo-account-grid">
         <c:forEach items="${acessosDemo}" var="a">
           <button type="button" class="demo-account" data-demo-account

@@ -16,11 +16,11 @@
   <section class="hero">
     <div class="hero-content">
       <span class="eyebrow">DO CAMPO PARA O CAMPO</span>
-      <h2>Prepare hoje.<br>Colha amanhã.</h2>
+      <h2>Tudo começa com<br><em>uma boa escolha.</em></h2>
       <p>Consulte o stock, escolha as quantidades e receba a sua factura na hora.</p>
       <span class="badge">Preços apresentados sem IVA</span>
     </div>
-    <img src="${cp}/assets/img/campo.svg" alt="Paisagem agrícola ilustrada">
+    <img src="${cp}/assets/img/terraces.svg" alt="Linhas de cultivo em verde floresta e dourado">
   </section>
 
   <form method="get" class="filter-bar">

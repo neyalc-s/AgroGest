@@ -10,3 +10,9 @@
 /runtime/tomcat/webapps/
 *.ser
 *.ser.bak
+
+# Fixture de compatibilidade usado pelos testes Java.
+!/src/test/resources/estado-v1.ser
+
+# Cache criado pelos testes Python.
+__pycache__/

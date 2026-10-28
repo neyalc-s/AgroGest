@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="jakarta.tags.core" %>
 <%-- Desenhos no próprio HTML: nenhum pedido externo para apresentar os ícones. --%>
 <svg class="icon" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><c:choose>
+<c:when test="${nome == 'marca'}"><path d="M12 21V10M12 14C4 14 3 8 3 4c7 0 9 4 9 10ZM12 10c0-5 4-8 9-8 0 6-3 10-9 10M4 21h16M6 18h12"/></c:when>
 <c:when test="${nome == 'folha'}"><path d="M20 3C9 2 3 7 5 14s13 5 15-11Z"/><path d="M3 21 15 9M8 16l-1-6m2 5 6 1"/></c:when>
 <c:when test="${nome == 'painel'}"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></c:when>
 <c:when test="${nome == 'fornecedor'}"><path d="M3 6h12v11H3zM15 10h3l3 4v3h-6"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/></c:when>
